@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "npm install -g prisma && prisma generate"
   },
   "engines": {
     "node": "20.x"
@@ -20,6 +20,8 @@
     "axios": "^1.8.4",
     "next": "^15.2.4",
     "nft.storage": "^7.2.0",
+    "prisma": "^5.10.2",
+    "@prisma/client": "^5.10.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "socket.io": "^4.8.1",
@@ -50,7 +52,6 @@
     "prettier": "^2.6.2",
     "typescript": "5.0.4"
   },
-  "prepare": "husky install",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix",
     "*.{ts,tsx}": "bash -c tsc -p tsconfig.json --noEmit",
