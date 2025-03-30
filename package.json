@@ -7,8 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install",
-    "test": "jest"
+    "postinstall": "prisma generate"
+  },
+  "engines": {
+    "node": "18.x"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.4",
