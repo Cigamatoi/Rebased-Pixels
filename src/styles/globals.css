@@ -1,0 +1,59 @@
+:root {
+  --primary-color: #00ffcc;
+  --primary-hover: #33ffdd;
+  --background-dark: #0f0f1a;
+  --background-light: #1a1a2e;
+  --text-color: #ffffff;
+  --text-secondary: #cccccc;
+  --accent-color: #33ccff;
+  --font-title: 'Audiowide', 'Orbitron', sans-serif;
+  --font-heading: 'Orbitron', 'Syncopate', sans-serif;
+  --font-body: 'Exo 2', sans-serif;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  background: var(--background-dark);
+  color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6, .title {
+  font-family: var(--font-heading);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.headerTitle, .gameInfo h2 {
+  font-family: var(--font-title);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+}
+
+input {
+  font-family: var(--font-body);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
