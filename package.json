@@ -6,11 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "npm install -g prisma && prisma generate"
+    "lint": "next lint"
   },
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.4",
@@ -20,8 +19,6 @@
     "axios": "^1.8.4",
     "next": "^15.2.4",
     "nft.storage": "^7.2.0",
-    "prisma": "^5.10.2",
-    "@prisma/client": "^5.10.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "socket.io": "^4.8.1",
