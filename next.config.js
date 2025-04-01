@@ -17,6 +17,34 @@ const nextConfig = {
     // Dies erlaubt erfolgreiche Production-Builds auch wenn TypeScript-Fehler vorhanden sind
     ignoreBuildErrors: true,
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains'
+          }
+        ]
+      }
+    ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'rebasedpixels.herokuapp.com'
+          }
+        ],
+        destination: 'https://rebasedpixels.herokuapp.com/:path*',
+        permanent: true
+      }
+    ]
+  }
 }
 
 // eslint-disable-next-line no-undef
