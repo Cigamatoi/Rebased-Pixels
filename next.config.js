@@ -17,6 +17,9 @@ const nextConfig = {
     // Dies erlaubt erfolgreiche Production-Builds auch wenn TypeScript-Fehler vorhanden sind
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ['rebasedpixels-885b44bd8285.herokuapp.com'],
+  },
   async headers() {
     return [
       {
@@ -33,16 +36,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*',
+        source: '/',
         has: [
           {
             type: 'host',
-            value: 'rebasedpixels.herokuapp.com'
-          }
+            value: 'rebasedpixels.xyz',
+          },
         ],
-        destination: 'https://rebasedpixels.herokuapp.com/:path*',
-        permanent: true
-      }
+        destination: 'https://www.rebasedpixels.xyz',
+        permanent: true,
+      },
     ]
   }
 }
