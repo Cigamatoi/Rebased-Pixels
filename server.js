@@ -158,6 +158,9 @@ app.get('/api/screenshots/:filename', (req, res) => {
   }
 })
 
+// Statische Dateien servieren
+app.use(express.static(path.join(__dirname, 'public')))
+
 // Next.js vorbereiten und Server starten
 nextApp.prepare().then(() => {
   // Alle anderen Routen an Next.js weiterleiten
@@ -165,7 +168,11 @@ nextApp.prepare().then(() => {
     return handle(req, res)
   })
 
-  server.listen(PORT, () => {
+  server.listen(PORT, (err) => {
+    if (err) throw err
     console.log(`Server läuft auf Port ${PORT}`)
   })
+}).catch((ex) => {
+  console.error(ex.stack)
+  process.exit(1)
 }) 
