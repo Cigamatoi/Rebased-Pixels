@@ -147,7 +147,7 @@ app.get('/api/screenshots/:filename', (req, res) => {
   }
 })
 
-// Start server
+// Starte den Server
 server.listen(PORT, () => {
   console.log(`Server läuft auf Port ${PORT}`)
 }) 
