@@ -7,7 +7,6 @@ const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 const next = require('next')
-const { scheduler } = require('./src/utils/scheduler')
 
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
@@ -161,9 +160,6 @@ app.get('/api/screenshots/:filename', (req, res) => {
 
 // Statische Dateien servieren
 app.use(express.static(path.join(__dirname, 'public')))
-
-// Starte den Scheduler
-scheduler.start();
 
 // Next.js vorbereiten und Server starten
 nextApp.prepare().then(() => {
