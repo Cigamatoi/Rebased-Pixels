@@ -15,6 +15,8 @@ export const TEST_EPOCH_DURATION = 1 * 60 * 1000 // 1 minute
 // Fester Startzeitpunkt für die erste Epoche (2. April 2024, 00:01:00 UTC)
 export const EPOCH_START = new Date('2024-04-02T00:01:00Z').getTime()
 
+export const EPOCH_DURATION_MS = 3 * 24 * 60 * 60 * 1000; // 3 Tage in Millisekunden
+
 /**
  * Berechnet die nächste Epochen-Endzeit basierend auf dem festen Startzeitpunkt
  * @param epochDuration - Dauer einer Epoche in Millisekunden

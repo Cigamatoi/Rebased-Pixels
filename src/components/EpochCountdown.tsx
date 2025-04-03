@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { formatTimeLeft } from '../utils/time'
 import styles from '../styles/PixelGame.module.css'
 
@@ -12,39 +12,34 @@ export const EpochCountdown: React.FC<EpochCountdownProps> = ({ onEpochEnd, canv
   const [isLoading, setIsLoading] = useState(true)
   const [isResetting, setIsResetting] = useState(false)
 
-  // Server-Sync alle 60 Sekunden
   useEffect(() => {
-    const fetchResetTime = async () => {
+    const fetchTimeLeft = async () => {
       try {
-        setIsLoading(true)
-        const response = await fetch('https://rebasedpixels.herokuapp.com/api/reset-time')
-        const data = await response.json()
-        setTimeLeft(data.timeRemainingMs)
+        const response = await fetch('/api/reset-time')
+        const { timeRemainingMs } = await response.json()
+        setTimeLeft(timeRemainingMs)
+        setIsLoading(false)
       } catch (error) {
-        console.error('Fehler beim Laden der Reset-Zeit:', error)
-      } finally {
+        console.error('Fehler beim Laden der verbleibenden Zeit:', error)
         setIsLoading(false)
       }
     }
 
-    fetchResetTime()
-    const interval = setInterval(fetchResetTime, 60000)
-    return () => clearInterval(interval)
-  }, [])
+    fetchTimeLeft()
 
-  // Lokaler Countdown jede Sekunde
-  useEffect(() => {
-    if (timeLeft === null || timeLeft <= 0) return
-
+    // Aktualisiere die Zeit jede Sekunde
     const interval = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev === null) return 0
-        return Math.max(prev - 1000, 0)
-      })
+      setTimeLeft(prev => prev !== null ? Math.max(0, prev - 1000) : null)
     }, 1000)
 
-    return () => clearInterval(interval)
-  }, [timeLeft])
+    // Synchronisiere mit dem Server jede Minute
+    const syncInterval = setInterval(fetchTimeLeft, 60 * 1000)
+
+    return () => {
+      clearInterval(interval)
+      clearInterval(syncInterval)
+    }
+  }, [])
 
   // Epochenende-Handler
   useEffect(() => {
@@ -86,12 +81,20 @@ export const EpochCountdown: React.FC<EpochCountdownProps> = ({ onEpochEnd, canv
     }
   }
 
+  if (isLoading) {
+    return <div>Lade...</div>
+  }
+
+  if (timeLeft === null) {
+    return <div>Fehler beim Laden der Zeit</div>
+  }
+
   return (
     <div className={styles.timer}>
       <div className={styles.timerIcon}>⏳</div>
       <div className={styles.timerText}>
-        {isLoading || timeLeft === null ? (
-          '⏳ Lade...'
+        {timeLeft === 0 ? (
+          'Epochenende'
         ) : (
           <span className={styles.timeValue}>{formatTimeLeft(timeLeft)}</span>
         )}
