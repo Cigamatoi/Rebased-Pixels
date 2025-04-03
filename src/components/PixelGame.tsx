@@ -6,6 +6,7 @@ import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../config/contract'
 import { parseEther } from 'viem'
 import { formatTimeLeft } from '@/utils/time'
 import { EpochCountdown } from './EpochCountdown'
+import { io } from 'socket.io-client'
 
 export const PixelGame: React.FC = () => {
   const { address } = useAccount()
@@ -14,8 +15,36 @@ export const PixelGame: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [pixels, setPixels] = useState<Array<{ x: number; y: number; color: string }>>([])
   const [isMultiplayer, setIsMultiplayer] = useState(false)
+  const socketRef = useRef<any>(null)
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  // Socket.IO Verbindung
+  useEffect(() => {
+    if (isMultiplayer) {
+      socketRef.current = io({
+        transports: ['websocket', 'polling'],
+        withCredentials: true,
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000
+      })
+
+      socketRef.current.on('connect', () => {
+        console.log('Socket.IO verbunden')
+      })
+
+      socketRef.current.on('disconnect', () => {
+        console.log('Socket.IO getrennt')
+      })
+
+      return () => {
+        if (socketRef.current) {
+          socketRef.current.disconnect()
+        }
+      }
+    }
+  }, [isMultiplayer])
 
   // Server-Sync alle 60 Sekunden
   useEffect(() => {

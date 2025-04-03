@@ -9,8 +9,13 @@ const { Server } = require('socket.io')
 const io = new Server(server, {
   cors: {
     origin: ["https://www.rebasedpixels.xyz", "https://rebasedpixels.herokuapp.com"],
-    methods: ["GET", "POST"]
-  }
+    methods: ["GET", "POST"],
+    credentials: true
+  },
+  transports: ['websocket', 'polling'],
+  allowEIO3: true,
+  pingTimeout: 60000,
+  pingInterval: 25000
 })
 
 // Fester Startzeitpunkt für die erste Epoche (2. April 2024, 00:01:00 UTC)
