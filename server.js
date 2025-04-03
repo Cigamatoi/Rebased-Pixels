@@ -3,10 +3,28 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const fs = require('fs')
 const path = require('path')
+const http = require('http')
+const server = http.createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(server, {
+  cors: {
+    origin: ["https://www.rebasedpixels.xyz", "https://rebasedpixels.herokuapp.com"],
+    methods: ["GET", "POST"]
+  }
+})
 
 // Fester Startzeitpunkt für die erste Epoche (2. April 2024, 00:01:00 UTC)
 const EPOCH_START = new Date('2024-04-02T00:01:00Z').getTime()
 const EPOCH_DURATION_MS = 3 * 24 * 60 * 60 * 1000 // 3 Tage
+
+// Socket.IO Verbindung
+io.on('connection', (socket) => {
+  console.log('Ein Benutzer hat sich verbunden')
+  
+  socket.on('disconnect', () => {
+    console.log('Ein Benutzer hat sich getrennt')
+  })
+})
 
 // Gibt den letzten Resetzeitpunkt und die verbleibende Zeit zurück
 app.get('/api/reset-time', (req, res) => {
@@ -129,6 +147,7 @@ app.get('/api/screenshots/:filename', (req, res) => {
   }
 })
 
-app.listen(PORT, () => {
+// Start server
+server.listen(PORT, () => {
   console.log(`Server läuft auf Port ${PORT}`)
 }) 
