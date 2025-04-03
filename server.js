@@ -6,6 +6,12 @@ const path = require('path')
 const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
+const next = require('next')
+
+const dev = process.env.NODE_ENV !== 'production'
+const nextApp = next({ dev })
+const handle = nextApp.getRequestHandler()
+
 const io = new Server(server, {
   cors: {
     origin: ["https://www.rebasedpixels.xyz", "https://rebasedpixels.herokuapp.com"],
@@ -152,7 +158,14 @@ app.get('/api/screenshots/:filename', (req, res) => {
   }
 })
 
-// Starte den Server
-server.listen(PORT, () => {
-  console.log(`Server läuft auf Port ${PORT}`)
+// Next.js vorbereiten und Server starten
+nextApp.prepare().then(() => {
+  // Alle anderen Routen an Next.js weiterleiten
+  app.all('*', (req, res) => {
+    return handle(req, res)
+  })
+
+  server.listen(PORT, () => {
+    console.log(`Server läuft auf Port ${PORT}`)
+  })
 }) 
