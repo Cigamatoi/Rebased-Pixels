@@ -1,0 +1,29 @@
+.mobileWrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #0f0f1a;
+  z-index: 15;
+  margin: 0;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pixelCanvas {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #0f0f1a;
+  image-rendering: pixelated;
+  touch-action: none;
+  border: 2px solid #00ffcc;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+  position: relative;
+  z-index: 20;
+  user-select: none;
+} 

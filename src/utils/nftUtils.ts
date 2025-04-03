@@ -122,3 +122,73 @@ export const getAllNFTs = async (): Promise<
     },
   }))
 }
+
+/**
+ * Holt einen Screenshot für eine bestimmte Epoche
+ */
+export const getScreenshotForEpoch = async (epochNumber: number): Promise<string> => {
+  try {
+    // 1. Hole alle verfügbaren Screenshots
+    const response = await fetch('https://rebasedpixels.herokuapp.com/api/screenshots')
+    const { screenshots } = await response.json()
+    
+    // 2. Finde den Screenshot für die gewünschte Epoche
+    const screenshot = screenshots.find((s: any) => s.epoch === epochNumber)
+    if (!screenshot) {
+      throw new Error(`Kein Screenshot für Epoche ${epochNumber} gefunden`)
+    }
+    
+    // 3. Hole den Base64-String des Screenshots
+    const screenshotResponse = await fetch(`https://rebasedpixels.herokuapp.com/api/screenshots/${screenshot.filename}`)
+    const { image } = await screenshotResponse.json()
+    
+    return image
+  } catch (error) {
+    console.error('Fehler beim Laden des Screenshots:', error)
+    throw error
+  }
+}
+
+/**
+ * Erstellt NFT-Metadaten für eine Epoche
+ */
+export const createEpochNFTMetadata = async (
+  epochNumber: number,
+  pixelCount: number,
+  contributors: string[]
+): Promise<any> => {
+  try {
+    // Hole den Screenshot
+    const screenshot = await getScreenshotForEpoch(epochNumber)
+    
+    // Erstelle die Metadaten
+    return {
+      name: `Rebased Pixels - Epoch ${epochNumber}`,
+      description: `This NFT represents the collective artwork created during epoch ${epochNumber} on the Rebased Pixels platform.`,
+      image: screenshot,
+      attributes: [
+        {
+          trait_type: "Epoch",
+          value: epochNumber
+        },
+        {
+          trait_type: "Pixel Count",
+          value: pixelCount
+        },
+        {
+          trait_type: "Contributors",
+          value: contributors.length
+        }
+      ],
+      properties: {
+        epoch: epochNumber,
+        pixelCount,
+        contributors,
+        timestamp: new Date().toISOString()
+      }
+    }
+  } catch (error) {
+    console.error('Fehler beim Erstellen der NFT-Metadaten:', error)
+    throw error
+  }
+}

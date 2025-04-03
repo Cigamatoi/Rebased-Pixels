@@ -246,27 +246,33 @@
 }
 
 .canvasWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
   position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  white-space: nowrap;
   background-color: #0f0f1a;
   z-index: 15;
   margin: 0;
   padding: 15px;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pixelCanvas {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #0f0f1a;
+  image-rendering: pixelated;
+  touch-action: none;
   border: 2px solid #00ffcc;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
-  background-color: #0f0f1a;
   position: relative;
   z-index: 20;
-  max-width: 100%;
-  height: auto;
+  user-select: none;
 }
 
 .backgroundSplashes {
@@ -827,4 +833,35 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 20px;
+}
+
+.zoomButton {
+  background: linear-gradient(90deg, #00ffcc, #00bbaa);
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: #000;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 0 12px #00ffcc;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.zoomButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ffcc;
+}
+
+.zoomValue {
+  color: #00ffcc;
+  font-size: 1rem;
+  min-width: 60px;
+  text-align: center;
 } 

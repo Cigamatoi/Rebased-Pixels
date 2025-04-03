@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-
 import styles from '../styles/PixelGame.module.css'
+import PixelCanvasMobile from './mobile/PixelCanvasMobile'
+import { useMediaQuery } from 'react-responsive'
 
 // Konstanten
 const PIXEL_SIZE = 10
@@ -24,8 +25,7 @@ interface PixelCanvasProps {
   colorChangeCount?: number
 }
 
-// Separate Canvas-Komponente, die unabhängig vom React-Lifecycle funktioniert
-const PixelCanvas = ({
+const PixelCanvas: React.FC<PixelCanvasProps> = ({
   pixels,
   onPixelClick,
   width = 80,
@@ -33,8 +33,23 @@ const PixelCanvas = ({
   pixelSize = 10,
   showGrid = true,
   disabled = false,
-}: PixelCanvasProps) => {
+}) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 })
+
+  if (isMobile) {
+    return (
+      <PixelCanvasMobile
+        width={width * pixelSize}
+        height={height * pixelSize}
+        pixelSize={pixelSize}
+        onPixelClick={onPixelClick}
+        disabled={disabled}
+      />
+    )
+  }
+
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
   const isRenderedRef = useRef<boolean>(false)
 
   // Canvas-Dimensionen berechnen
@@ -113,7 +128,6 @@ const PixelCanvas = ({
     const handleClick = (e: MouseEvent) => {
       if (disabled) {
         console.log('Canvas ist deaktiviert')
-
         return
       }
 
@@ -138,7 +152,10 @@ const PixelCanvas = ({
   }, [onPixelClick, disabled, pixelSize])
 
   return (
-    <div className={styles.canvasWrapper}>
+    <div 
+      ref={wrapperRef}
+      className={styles.canvasWrapper}
+    >
       <canvas
         ref={canvasRef}
         width={canvasWidth}
@@ -146,7 +163,7 @@ const PixelCanvas = ({
         className={styles.pixelCanvas}
         style={{
           cursor: disabled ? 'not-allowed' : 'pointer',
-          imageRendering: 'pixelated', // Für schärfere Pixeldarstellung
+          imageRendering: 'pixelated',
         }}
       />
     </div>

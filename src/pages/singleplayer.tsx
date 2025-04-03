@@ -31,34 +31,6 @@ export default function Singleplayer() {
     router.push('/start')
   }
 
-  // Zeichne das Canvas neu, wenn sich die Größe oder Pixel ändern
-  useEffect(() => {
-    if (!canvasRef.current || !startGame) return
-
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    // Hintergrund schwarz
-    ctx.fillStyle = '#000000'
-    ctx.fillRect(0, 0, canvasSize, canvasSize)
-
-    // Graue Pixel-Raster
-    for (let x = 0; x < canvasSize; x += pixelSize) {
-      for (let y = 0; y < canvasSize; y += pixelSize) {
-        ctx.fillStyle = '#111111'
-        ctx.fillRect(x, y, pixelSize - 1, pixelSize - 1)
-      }
-    }
-
-    // Alle Pixel zeichnen
-    console.log(`Zeichne ${pixels.length} Pixel`)
-    pixels.forEach((pixel) => {
-      ctx.fillStyle = pixel.color
-      ctx.fillRect(pixel.x, pixel.y, pixelSize - 1, pixelSize - 1)
-    })
-  }, [pixels, canvasSize, pixelSize, startGame])
-
   // Resize-Event für den Canvas
   const handleResizeStart = () => {
     setResizeMode(true)
@@ -162,77 +134,75 @@ export default function Singleplayer() {
         </div>
       </header>
 
-      <div className={styles.mainCard}>
-        <div className={styles.gameInfo}>
-          <h2>Singleplayer Mode</h2>
-          <p>Draw freely without blockchain transactions. Pixels are stored locally only.</p>
-        </div>
+      <div className={styles.gameInfo}>
+        <h2>Singleplayer Mode</h2>
+        <p>Draw freely without blockchain transactions. Pixels are stored locally only.</p>
+      </div>
 
-        {!startGame ? (
-          <div className={styles.setupContainer}>
-            <h3>Choose canvas size</h3>
-            <p>Drag with your mouse to adjust the canvas size.</p>
+      {!startGame ? (
+        <div className={styles.setupContainer}>
+          <h3>Choose canvas size</h3>
+          <p>Drag with your mouse to adjust the canvas size.</p>
 
-            <div
-              className={styles.canvasSizeDemo}
-              style={{
-                width: `${canvasSize}px`,
-                height: `${canvasSize}px`,
-                cursor: resizeMode ? 'nwse-resize' : 'pointer',
-              }}
-              onMouseDown={handleResizeStart}
-              onMouseMove={handleResizeMove}
-              onMouseUp={handleResizeEnd}
-              onMouseLeave={handleResizeEnd}
-            >
-              <div className={styles.canvasSizeInfo}>
-                {canvasSize}×{canvasSize} Pixels
-                <div className={styles.pixelSizeInfo}>Pixel size: {pixelSize}px</div>
-              </div>
+          <div
+            className={styles.canvasSizeDemo}
+            style={{
+              width: `${canvasSize}px`,
+              height: `${canvasSize}px`,
+              cursor: resizeMode ? 'nwse-resize' : 'pointer',
+            }}
+            onMouseDown={handleResizeStart}
+            onMouseMove={handleResizeMove}
+            onMouseUp={handleResizeEnd}
+            onMouseLeave={handleResizeEnd}
+          >
+            <div className={styles.canvasSizeInfo}>
+              {canvasSize}×{canvasSize} Pixels
+              <div className={styles.pixelSizeInfo}>Pixel size: {pixelSize}px</div>
             </div>
-
-            <button className={styles.startButton} onClick={() => setStartGame(true)}>
-              Start
-            </button>
           </div>
-        ) : (
-          <>
-            <div className={styles.controlsContainer}>
-              <div>
-                <label htmlFor="colorPicker">Choose color: </label>
-                <input
-                  type="color"
-                  id="colorPicker"
-                  className={styles.colorPicker}
-                  defaultValue={selectedColor}
-                  onChange={handleColorChange}
-                />
-              </div>
 
-              <button className={styles.clearButton} onClick={handleClearCanvas}>
-                Clear canvas
-              </button>
-            </div>
-
-            <div className={styles.canvasWrapper}>
-              <canvas
-                ref={canvasRef}
-                width={canvasSize}
-                height={canvasSize}
-                className={styles.pixelCanvas}
-                style={{
-                  cursor: 'crosshair',
-                  imageRendering: 'pixelated',
-                }}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
+          <button className={styles.startButton} onClick={() => setStartGame(true)}>
+            Start
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className={styles.controlsContainer}>
+            <div>
+              <label htmlFor="colorPicker">Choose color: </label>
+              <input
+                type="color"
+                id="colorPicker"
+                className={styles.colorPicker}
+                defaultValue={selectedColor}
+                onChange={handleColorChange}
               />
             </div>
-          </>
-        )}
-      </div>
+
+            <button className={styles.clearButton} onClick={handleClearCanvas}>
+              Clear canvas
+            </button>
+          </div>
+
+          <div className={styles.canvasWrapper}>
+            <canvas
+              ref={canvasRef}
+              width={canvasSize}
+              height={canvasSize}
+              className={styles.pixelCanvas}
+              style={{
+                cursor: 'crosshair',
+                imageRendering: 'pixelated',
+              }}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+            />
+          </div>
+        </>
+      )}
 
       <footer className={styles.pageFooter}>From Ciga with love - powered by IOTA Rebased Testnet</footer>
     </div>

@@ -12,20 +12,24 @@ export const DEFAULT_EPOCH_DURATION = 3 * 24 * 60 * 60 * 1000 // 3 days
  */
 export const TEST_EPOCH_DURATION = 1 * 60 * 1000 // 1 minute
 
+// Fester Startzeitpunkt für die erste Epoche (2. April 2024, 00:01:00 UTC)
+export const EPOCH_START = new Date('2024-04-02T00:01:00Z').getTime()
+
 /**
- * Calculate the next epoch end time
- * @param epochDuration - Duration of the epoch in milliseconds
- * @returns Date object representing the next epoch end time
+ * Berechnet die nächste Epochen-Endzeit basierend auf dem festen Startzeitpunkt
+ * @param epochDuration - Dauer einer Epoche in Millisekunden
+ * @param epochStartTime - Startzeitpunkt der ersten Epoche
+ * @returns Date-Objekt, das die nächste Epochen-Endzeit repräsentiert
  */
-export const calculateNextEpochEndTime = (epochDuration: number = DEFAULT_EPOCH_DURATION): Date => {
-  // For a real application we'd store the end time of the current epoch
-  // and calculate from that, but for simplicity we'll calculate based on the current time
-  const now = new Date()
-
-  // If we want epochs to align with specific times (e.g. midnight UTC),
-  // we would implement that logic here
-
-  return new Date(now.getTime() + epochDuration)
+export const calculateNextEpochEndTime = (
+  epochDuration: number = DEFAULT_EPOCH_DURATION,
+  epochStartTime: number = EPOCH_START
+): Date => {
+  const now = Date.now()
+  const elapsed = now - epochStartTime
+  const completedEpochs = Math.floor(elapsed / epochDuration)
+  const nextEpochEnd = epochStartTime + (completedEpochs + 1) * epochDuration
+  return new Date(nextEpochEnd)
 }
 
 /**
