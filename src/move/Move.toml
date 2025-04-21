@@ -9,4 +9,12 @@ MoveStdlib = { git = "https://github.com/iotaledger/iota.git", rev = "testnet", 
 
 [addresses]
 nft_admin = "0x0"
-iota = "0x2" 
+iota = "0x2"
+
+[dev-addresses]
+nft_admin = "0x0"
+iota = "0x2"
+
+[dev-dependencies]
+Iota = { git = "https://github.com/iotaledger/iota.git", rev = "testnet", subdir = "crates/iota-framework/packages/iota-framework" }
+MoveStdlib = { git = "https://github.com/iotaledger/iota.git", rev = "testnet", subdir = "crates/iota-framework/packages/move-stdlib" } 
