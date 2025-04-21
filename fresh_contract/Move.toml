@@ -1,0 +1,11 @@
+[package]
+name = "singleplayer_paid_nft"
+edition = "2024.beta" 
+license = "MIT"
+authors = ["RebasedPixels Team"]
+
+[dependencies]
+Iota = { git = "https://github.com/iotaledger/iota.git", subdir = "crates/iota-framework/packages/iota-framework", rev = "framework/testnet" }
+
+[addresses]
+singleplayer_paid_nft = "0x0" 

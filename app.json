@@ -1,0 +1,62 @@
+{
+  "name": "RebasedPixels",
+  "description": "Eine dezentrale Pixel-Canvas mit automatischem NFT-Minting für die IOTA Blockchain",
+  "repository": "https://github.com/yourusername/rebasedpixels",
+  "logo": "https://example.com/logo.png",
+  "keywords": ["iota", "nft", "blockchain", "pixels", "art"],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/yourusername/heroku-buildpack-iota-cli"
+    }
+  ],
+  "env": {
+    "IOTA_NETWORK": {
+      "description": "Das zu verwendende IOTA-Netzwerk",
+      "value": "testnet"
+    },
+    "NFT_PACKAGE_ID": {
+      "description": "Die Package-ID des Move-Pakets",
+      "required": true
+    },
+    "NFT_MODULE_NAME": {
+      "description": "Der Name des Moduls in deinem Move-Paket",
+      "value": "rebased_pixels"
+    },
+    "NFT_MINT_FUNCTION": {
+      "description": "Der Name der NFT-Mint-Funktion",
+      "value": "mint_nft"
+    },
+    "NFT_RANDOM_FUNCTION": {
+      "description": "Der Name der Zufallsgewinner-Funktion",
+      "value": "get_random_winner"
+    },
+    "ADMIN_ADDRESS": {
+      "description": "Die IOTA-Adresse des Admin-Accounts",
+      "required": true
+    },
+    "ADMIN_PRIVATE_KEY": {
+      "description": "Der private Schlüssel des Admin-Accounts (sicherer: als Config Var direkt in Heroku einstellen)",
+      "required": true
+    },
+    "AUTO_MINT_INTERVAL": {
+      "description": "Intervall für automatisches Minting in Millisekunden",
+      "value": "3600000"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "scripts": {
+    "postdeploy": "node nft-admin/scripts/setup.js"
+  }
+} 

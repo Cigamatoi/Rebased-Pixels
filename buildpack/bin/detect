@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Prüft, ob dieses Buildpack für die Anwendung geeignet ist
+# Eine erfolgreiche Erkennung ist hier immer gegeben
+echo "IOTA CLI"
+exit 0 

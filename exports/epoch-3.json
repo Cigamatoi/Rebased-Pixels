@@ -1,0 +1,15 @@
+{
+  "epochNumber": 3,
+  "exportedAt": "2025-04-18T14:00:00.000Z",
+  "canvasSize": {
+    "width": 1000,
+    "height": 1000
+  },
+  "addresses": [
+    "0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5",
+    "0x9bd8f5aaa946615afa32cf56e32ff5205c5b4e58e60f4c0635587bbb6d2df43d",
+    "0xa310c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66d9",
+    "0xb410c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66c8",
+    "0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f"
+  ]
+} 

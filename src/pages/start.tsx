@@ -30,7 +30,6 @@ export default function Start() {
       title: '',
       description: 'Enjoy drawing for yourself. No hurry, you can choose the canvas size.',
       imageUrl: '/images/Singleplayer.png',
-      comingSoon: true,
     },
     {
       id: 'battle',
@@ -61,8 +60,10 @@ export default function Start() {
 
     if (selectedMode === 'multiplayer') {
       router.push('/game')
+    } else if (selectedMode === 'singleplayer') {
+      router.push('/singleplayer')
     }
-    // Singleplayer and Battle mode are not available yet
+    // Battle mode is not available yet
   }
 
   return (

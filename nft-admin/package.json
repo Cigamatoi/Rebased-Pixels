@@ -1,0 +1,32 @@
+{
+  "name": "rebased-pixels-nft-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3002",
+    "build": "next build",
+    "start": "next start -p 3002",
+    "cron": "node src/scripts/autoMintCron.js"
+  },
+  "dependencies": {
+    "@iota/dapp-kit": "^0.4.1",
+    "axios": "^1.5.1",
+    "next": "14.0.1",
+    "node-cron": "^3.0.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-toastify": "^9.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/node-cron": "^3.0.8",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}

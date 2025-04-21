@@ -1,0 +1,102 @@
+[2025-04-17T14:36:30.003Z] AutoMintCron gestartet. Führe erste Überprüfung durch...
+[2025-04-17T14:36:30.006Z] Fehler beim Laden der Exportdateien: ENOENT: no such file or directory, scandir 'D:\reference-project\rebasedpixels\data\exports'
+[2025-04-17T14:36:30.007Z] Keine Exportdateien gefunden.
+[2025-04-17T14:38:00.906Z] AutoMintCron gestartet. Führe erste Überprüfung durch...
+[2025-04-17T14:38:00.909Z] Exportverzeichnis D:\reference-project\rebasedpixels\data\exports existiert nicht. Erstelle es...
+[2025-04-17T14:38:00.910Z] Keine Exportdateien gefunden.
+[2025-04-17T23:26:50.034Z] AutoMintCron gestartet - Prüfe auf neue Epochs
+[2025-04-17T23:26:50.065Z] Keine neuen Epochs gefunden.
+[2025-04-17T23:27:20.728Z] AutoMintCron gestartet - Prüfe auf neue Epochs
+[2025-04-17T23:27:20.757Z] Neue Epoch 1 gefunden - Starte Verarbeitung
+[2025-04-17T23:27:20.759Z] Verwende IOTA CLI für die Auswahl eines zufälligen Gewinners
+[2025-04-17T23:27:20.794Z] Fehler bei der Auswahl eines Gewinners: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 --module epoch_contract::epoch --function select_random_winner --args 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 0x9bd8f5aaa946615afa32cf56e32ff5205c5b4e58e60f4c0635587bbb6d2df43d 0xa310c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66d9 --gas-budget 1000000 --sender 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5
+error: unexpected argument '--sender' found
+
+  tip: to pass '--sender' as a value, use '-- --sender'
+
+Usage: iota.exe client call --package <PACKAGE> --module <MODULE> --function <FUNCTION> --args <ARGS>... <--gas-budget <GAS_BUDGET>|--dry-run|--dev-inspect|--serialize-unsigned-transaction|--serialize-signed-transaction|--emit [<EMIT>...]>
+
+For more information, try '--help'.
+. Verwende Fallback-Methode.
+[2025-04-17T23:27:20.796Z] Gewinner ausgewählt: 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5
+[2025-04-17T23:27:20.797Z] Metadaten für NFT erstellt: {"name":"Epoch 1 Pixel NFT","description":"NFT für die Canvas der Epoch 1","epoch":1,"timestamp":"2025-04-17T23:27:20.797Z","pixelCount":3,"canvasSize":{"width":1000,"height":1000}}
+[2025-04-17T23:27:20.797Z] Bild-URL: /api/screenshots/epoch-1.png
+[2025-04-17T23:27:20.797Z] Präge NFT für Adresse 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 mit IOTA CLI
+[2025-04-17T23:27:20.835Z] Fehler beim Prägen des NFT: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 --module nft_module::nft --function mint_nft --args 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 b"Epoch 1 Pixel NFT" b"NFT für die Canvas der Epoch 1" b"/api/screenshots/epoch-1.png" 1 3 --gas-budget 1000000 --sender 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5
+error: unexpected argument '--sender' found
+
+  tip: to pass '--sender' as a value, use '-- --sender'
+
+Usage: iota.exe client call --package <PACKAGE> --module <MODULE> --function <FUNCTION> --args <ARGS>... <--gas-budget <GAS_BUDGET>|--dry-run|--dev-inspect|--serialize-unsigned-transaction|--serialize-signed-transaction|--emit [<EMIT>...]>
+
+For more information, try '--help'.
+. Simuliere erfolgreichen Mint.
+[2025-04-17T23:27:20.836Z] Epoch 1 als verarbeitet markiert
+[2025-04-17T23:27:20.837Z] Auto-Mint für Epoch 1 erfolgreich abgeschlossen. TX-ID: 0x1111111111111111111111111111111111111111111111111111111111111111
+[2025-04-17T23:28:22.278Z] AutoMintCron gestartet - Prüfe auf neue Epochs
+[2025-04-17T23:28:22.310Z] Neue Epoch 1 gefunden - Starte Verarbeitung
+[2025-04-17T23:28:22.311Z] Verwende IOTA CLI für die Auswahl eines zufälligen Gewinners
+[2025-04-17T23:28:22.537Z] Fehler bei der Auswahl eines Gewinners: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 --module epoch_contract::epoch --function select_random_winner --args 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 0x9bd8f5aaa946615afa32cf56e32ff5205c5b4e58e60f4c0635587bbb6d2df43d 0xa310c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66d9 --gas-budget 1000000
+. Verwende Fallback-Methode.
+[2025-04-17T23:28:22.538Z] Gewinner ausgewählt: 0x9bd8f5aaa946615afa32cf56e32ff5205c5b4e58e60f4c0635587bbb6d2df43d
+[2025-04-17T23:28:22.538Z] Metadaten für NFT erstellt: {"name":"Epoch 1 Pixel NFT","description":"NFT für die Canvas der Epoch 1","epoch":1,"timestamp":"2025-04-17T23:28:22.538Z","pixelCount":3,"canvasSize":{"width":1000,"height":1000}}
+[2025-04-17T23:28:22.538Z] Bild-URL: /api/screenshots/epoch-1.png
+[2025-04-17T23:28:22.539Z] Präge NFT für Adresse 0x9bd8f5aaa946615afa32cf56e32ff5205c5b4e58e60f4c0635587bbb6d2df43d mit IOTA CLI
+[2025-04-17T23:28:22.769Z] Fehler beim Prägen des NFT: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 --module nft_module::nft --function mint_nft --args 0x9bd8f5aaa946615afa32cf56e32ff5205c5b4e58e60f4c0635587bbb6d2df43d b"Epoch 1 Pixel NFT" b"NFT für die Canvas der Epoch 1" b"/api/screenshots/epoch-1.png" 1 3 --gas-budget 1000000
+. Simuliere erfolgreichen Mint.
+[2025-04-17T23:28:22.770Z] Epoch 1 als verarbeitet markiert
+[2025-04-17T23:28:22.770Z] Auto-Mint für Epoch 1 erfolgreich abgeschlossen. TX-ID: 0x1111111111111111111111111111111111111111111111111111111111111111
+[2025-04-18T00:15:33.565Z] AutoMintCron gestartet - Prüfe auf neue Epochs
+[2025-04-18T00:15:33.595Z] Keine neuen Epochs gefunden.
+[2025-04-18T09:24:47.923Z] AutoMintCron gestartet - Prüfe auf neue Epochs
+[2025-04-18T09:24:47.964Z] Neue Epoch 2 gefunden - Starte Verarbeitung
+[2025-04-18T09:24:47.965Z] Verwende IOTA CLI für die Auswahl eines zufälligen Gewinners
+[2025-04-18T09:24:48.141Z] Fehler bei der Auswahl eines Gewinners: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 --module epoch_contract::epoch --function select_random_winner --args 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 0x9bd8f5aaa946615afa32cf56e32ff5205c5b4e58e60f4c0635587bbb6d2df43d 0xa310c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66d9 0xb410c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66c8 --gas-budget 1000000
+. Verwende Fallback-Methode.
+[2025-04-18T09:24:48.141Z] Gewinner ausgewählt: 0xa310c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66d9
+[2025-04-18T09:24:48.142Z] Metadaten für NFT erstellt: {"name":"Epoch 2 Pixel NFT","description":"NFT für die Canvas der Epoch 2","epoch":2,"timestamp":"2025-04-18T09:24:48.142Z","pixelCount":4,"canvasSize":{"width":1000,"height":1000}}
+[2025-04-18T09:24:48.143Z] Bild-URL: /api/screenshots/epoch-2.png
+[2025-04-18T09:24:48.143Z] Präge NFT für Adresse 0xa310c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66d9 mit IOTA CLI
+[2025-04-18T09:24:48.353Z] Fehler beim Prägen des NFT: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 --module nft_module::nft --function mint_nft --args 0xa310c86516a99fbe338619917eafb26417a4ec38b2b4d2fe6a83dd6dffcd66d9 b"Epoch 2 Pixel NFT" b"NFT für die Canvas der Epoch 2" b"/api/screenshots/epoch-2.png" 2 4 --gas-budget 1000000
+. Simuliere erfolgreichen Mint.
+[2025-04-18T09:24:48.354Z] Epoch 2 als verarbeitet markiert
+[2025-04-18T09:24:48.355Z] Auto-Mint für Epoch 2 erfolgreich abgeschlossen. TX-ID: 0x1111111111111111111111111111111111111111111111111111111111111111
+[2025-04-18T10:00:19.079Z] AutoMintCron gestartet - Prüfe auf neue Epochs
+[2025-04-18T10:00:19.111Z] Neue Epoch 3 gefunden - Starte Verarbeitung
+[2025-04-18T10:00:19.111Z] Verwende IOTA CLI für die Auswahl eines zufälligen Gewinners
+[2025-04-18T10:00:19.359Z] Fehler bei der Auswahl eines Gewinners: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f --module simple_test::simple_test --function get_value --gas-budget 1000000
+. Verwende Fallback-Methode.
+[2025-04-18T10:00:19.359Z] Gewinner ausgewählt: 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5
+[2025-04-18T10:00:19.360Z] Metadaten für NFT erstellt: {"name":"Epoch 3 Pixel NFT","description":"NFT für die Canvas der Epoch 3","epoch":3,"timestamp":"2025-04-18T10:00:19.360Z","pixelCount":5,"canvasSize":{"width":1000,"height":1000}}
+[2025-04-18T10:00:19.360Z] Bild-URL: /api/screenshots/epoch-3.png
+[2025-04-18T10:00:19.361Z] Präge NFT für Adresse 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 mit IOTA CLI
+[2025-04-18T10:00:19.604Z] Fehler beim Prägen des NFT: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f --module simple_test::simple_test --function create_test_object --args 123 --gas-budget 1000000
+. Simuliere erfolgreichen Mint.
+[2025-04-18T10:00:19.605Z] Epoch 3 als verarbeitet markiert
+[2025-04-18T10:00:19.605Z] Auto-Mint für Epoch 3 erfolgreich abgeschlossen. TX-ID: 0x1111111111111111111111111111111111111111111111111111111111111111
+[2025-04-18T10:59:14.007Z] AutoMintCron gestartet - Prüfe auf neue Epochs
+[2025-04-18T10:59:14.038Z] Neue Epoch 4 gefunden - Starte Verarbeitung
+[2025-04-18T10:59:14.039Z] Verwende IOTA CLI für die Auswahl eines zufälligen Gewinners
+[2025-04-18T10:59:14.300Z] Fehler bei der Auswahl eines Gewinners: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f --module simple_test::simple_test --function get_value --gas-budget 1000000
+. Verwende Fallback-Methode.
+[2025-04-18T10:59:14.300Z] Gewinner ausgewählt: 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5
+[2025-04-18T10:59:14.301Z] Metadaten für NFT erstellt: {"name":"RebasedPixels - Epoch 4","description":"RebasedPixels NFT für die Canvas der Epoch 4","creator":"Cigamatoi","epoch":4,"timestamp":"2025-04-18T10:59:14.301Z","pixelCount":6,"canvasSize":{"width":1000,"height":1000},"attributes":[{"trait_type":"Epoch","value":4},{"trait_type":"Contributors","value":6},{"trait_type":"Creator","value":"Cigamatoi"},{"trait_type":"Collection","value":"RebasedPixels"}]}
+[2025-04-18T10:59:14.301Z] Bild-URL: /api/screenshots/epoch-4.png
+[2025-04-18T10:59:14.302Z] Präge NFT für Adresse 0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5 mit IOTA CLI
+[2025-04-18T10:59:14.484Z] Fehler beim Prägen des NFT: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f --module simple_test::simple_test --function create_test_object --args 406 --gas-budget 10000000
+. Simuliere erfolgreichen Mint.
+[2025-04-18T10:59:14.486Z] Epoch 4 als verarbeitet markiert
+[2025-04-18T10:59:14.486Z] Auto-Mint für Epoch 4 erfolgreich abgeschlossen. TX-ID: 0x1111111111111111111111111111111111111111111111111111111111111111
+[2025-04-18T11:06:43.475Z] AutoMintCron gestartet - Prüfe auf neue Epochs
+[2025-04-18T11:06:43.510Z] Neue Epoch 5 gefunden - Starte Verarbeitung
+[2025-04-18T11:06:43.510Z] Verwende IOTA CLI für die Auswahl eines zufälligen Gewinners
+[2025-04-18T11:06:43.784Z] Fehler bei der Auswahl eines Gewinners: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f --module simple_test::simple_test --function get_value --gas-budget 1000000
+. Verwende Fallback-Methode.
+[2025-04-18T11:06:43.784Z] Gewinner ausgewählt: 0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f
+[2025-04-18T11:06:43.785Z] Metadaten für NFT erstellt: {"name":"RebasedPixels - Epoch 5","description":"RebasedPixels NFT for Canvas of Epoch 5","creator":"Cigamatoi","epoch":5,"timestamp":"2025-04-18T11:06:43.785Z","pixelCount":7,"canvasSize":{"width":1000,"height":1000},"attributes":[{"trait_type":"Epoch","value":5},{"trait_type":"Contributors","value":7},{"trait_type":"Creator","value":"Cigamatoi"},{"trait_type":"Collection","value":"RebasedPixels"}]}
+[2025-04-18T11:06:43.786Z] Bild-URL: /api/screenshots/epoch-5.png
+[2025-04-18T11:06:43.787Z] Präge NFT für Adresse 0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f mit IOTA CLI
+[2025-04-18T11:06:43.978Z] Fehler beim Prägen des NFT: CLI Fehler: Command failed: "C:\iota\iota.exe" client call --package 0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f --module simple_test::simple_test --function create_test_object --args 507 --gas-budget 10000000
+. Simuliere erfolgreichen Mint.
+[2025-04-18T11:06:43.979Z] Epoch 5 als verarbeitet markiert
+[2025-04-18T11:06:43.980Z] Auto-Mint für Epoch 5 erfolgreich abgeschlossen. TX-ID: 0x1111111111111111111111111111111111111111111111111111111111111111

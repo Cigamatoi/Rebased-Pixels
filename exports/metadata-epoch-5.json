@@ -1,0 +1,33 @@
+{
+  "name": "RebasedPixels - Epoch 5",
+  "description": "RebasedPixels NFT for Canvas of Epoch 5",
+  "creator": "Cigamatoi",
+  "epoch": 5,
+  "timestamp": "2025-04-18T11:06:43.785Z",
+  "pixelCount": 7,
+  "canvasSize": {
+    "width": 1000,
+    "height": 1000
+  },
+  "attributes": [
+    {
+      "trait_type": "Epoch",
+      "value": 5
+    },
+    {
+      "trait_type": "Contributors",
+      "value": 7
+    },
+    {
+      "trait_type": "Creator",
+      "value": "Cigamatoi"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "RebasedPixels"
+    }
+  ],
+  "winnerAddress": "0x8a0afcb6c5b35b015242dee7c1f590b4dd65deaf54a2865fa030f107f9392f4f",
+  "mintTimestamp": "2025-04-18T11:06:43.788Z",
+  "imageUrl": "/api/screenshots/epoch-5.png"
+}

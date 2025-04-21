@@ -1,0 +1,17 @@
+{
+  "epochNumber": 1,
+  "epochStartTime": "2023-01-01T00:00:00Z",
+  "epochEndTime": "2023-01-08T00:00:00Z",
+  "contributors": [
+    "0x123456789abcdef0123456789abcdef01234567",
+    "0x9876543210abcdef9876543210abcdef98765432",
+    "0xabcdef0123456789abcdef0123456789abcdef01",
+    "0xfedcba9876543210fedcba9876543210fedcba98",
+    "0x2814ed96c9c39ba01d2c4d164cdfbd8e272192dd1ae39d11aac49e352c11b3c5"
+  ],
+  "metadata": {
+    "totalPixels": 10000,
+    "modifiedPixels": 8542,
+    "uniqueColors": 127
+  }
+} 

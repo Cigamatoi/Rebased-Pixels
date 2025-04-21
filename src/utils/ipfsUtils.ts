@@ -191,3 +191,43 @@ export async function saveImageToServer(canvasDataURL: string, filename = 'epoch
     throw error
   }
 }
+
+/**
+ * Lädt ein Bild zu Pinata IPFS hoch
+ * @param canvasDataURL Data URL des Canvas-Bildes
+ * @param filename Dateiname ohne Erweiterung
+ * @returns Die IPFS URL (Gateway URL) zum hochgeladenen Bild
+ */
+export async function uploadToPinata(canvasDataURL: string, filename = 'rebased-pixel-art'): Promise<string | null> {
+  try {
+    // Wandle Data URL in Blob/File um
+    const blob = dataURLtoBlob(canvasDataURL)
+    const file = new File([blob], `${filename}.png`, { type: 'image/png' })
+
+    // Erstelle FormData für den Upload
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('pinataMetadata', JSON.stringify({
+      name: filename,
+    }))
+
+    // Rufe die API über den Server-Proxy auf, um den JWT nicht im Frontend zu exponieren
+    const response = await fetch('/api/pinata-upload', {
+      method: 'POST',
+      body: formData,
+    })
+
+    if (!response.ok) {
+      throw new Error(`Pinata Upload fehlgeschlagen: ${response.status} ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    console.log('Pinata Upload erfolgreich:', data)
+
+    // Gib die Gateway URL zurück
+    return `https://gateway.pinata.cloud/ipfs/${data.IpfsHash}`
+  } catch (error) {
+    console.error('Fehler beim Upload zu Pinata:', error)
+    return null
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "epochNumber": 2,
+  "epochStartTime": "2023-04-15T00:00:00.000Z",
+  "epochEndTime": "2023-04-22T00:00:00.000Z",
+  "contributors": [
+    "0x4b3033a04c3acb718b530e5c11d436fc4b4d57ec",
+    "0xc77f2d62cd29281965c97398f4d2c8ba1b861cbe",
+    "0xe748b76cdd994fe8d2326ddd278343de51f1d1b5",
+    "0xf972698890a096645286b046b7e7414e335f21e6",
+    "0x3baf130433c3d22c5c14a23ac32d390c6964f686",
+    "0xc027ec47a185ff462e3a4d20c5e2e1832da7ce81",
+    "0xbefe9a363642acdaca491a8124425e0927a2ce03",
+    "0x0c4ba42fa02c38c5d4f9d9865f9874bcf3d2fe93",
+    "0x0e6cbf8e2804c074b4bb65b60ba4879b7e4aa5c6",
+    "0x88e33bc89d7f481760908748284d08ab5af8c8b6"
+  ],
+  "metadata": {
+    "name": "Rebased Pixels Epoch #2",
+    "description": "Kollektives Kunstwerk der Epoch #2",
+    "image": "/api/screenshots/epoch-2.png"
+  }
+} 

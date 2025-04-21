@@ -35,7 +35,8 @@ import Head from 'next/head'
 import { truncateAddress } from '~/helpers'
 import useSocket from '~/hooks/useSocket'
 import styles from '~/styles/PixelGame.module.css'
-import { createLocalBlobUrl, downloadImageFromUrl, saveImageToServer, uploadCanvasToIPFS } from '~/utils/ipfsUtils'
+import { createLocalBlobUrl, downloadImageFromUrl, saveImageToServer, uploadCanvasToIPFS, uploadToPinata } from '~/utils/ipfsUtils'
+import { calculateNextEpochEndTime } from '../utils/epochUtils'
 
 // Importiere die PixelCanvas-Komponente Client-seitig ohne SSR
 const PixelCanvas = dynamic(() => import('~/components/PixelCanvas'), {
@@ -97,15 +98,25 @@ const Game: NextPage = () => {
 
   // Initialisiere Timer für die Epoche
   useEffect(() => {
-    // Aktuelle Zeit + 3 Tage
-    const now = new Date()
-    // 3 Tage in Millisekunden
-    const threeDays = 3 * 24 * 60 * 60 * 1000
-    const nextEpochTime = new Date(now.getTime() + threeDays)
-
-    const epochEndTimeMs = nextEpochTime.getTime()
+    // Die Berechnung des Endzeitpunkts basierend auf dem festen Startzeitpunkt
+    const nextEpochEndTime = calculateNextEpochEndTime()
+    const epochEndTimeMs = nextEpochEndTime.getTime()
+    
     setEpochEndTime(epochEndTimeMs)
-    console.log(`Next epoch end time set to: ${new Date(epochEndTimeMs).toLocaleTimeString()}`)
+    console.log(`Next epoch end time set to: ${nextEpochEndTime.toLocaleTimeString()}`)
+
+    // Lade die Liste der Teilnehmer vom Server
+    fetch('/api/contributors/get')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Geladene Teilnehmer:', data)
+        if (data.contributors && Array.isArray(data.contributors)) {
+          setEpochContributors(data.contributors)
+        }
+      })
+      .catch(error => {
+        console.error('Fehler beim Laden der Teilnehmer:', error)
+      })
   }, [])
 
   // Separater Effekt für die Timer-Anzeige, aktualisiert jede Minute
@@ -127,19 +138,50 @@ const Game: NextPage = () => {
       if (timeLeft === 0) {
         console.log('Epoch ended, capturing canvas screenshot automatically')
 
-        // Screenshots erstellen
-        captureCanvasScreenshot()
+        // Exportiere die aktuelle Teilnehmerliste bevor sie zurückgesetzt wird
+        fetch('/api/contributors/export')
+          .then(response => response.json())
+          .then(data => {
+            console.log('Teilnehmerliste exportiert:', data)
+          })
+          .catch(error => {
+            console.error('Fehler beim Exportieren der Teilnehmerliste:', error)
+          })
 
-        // Setze den Timer für die nächste Epoche (weitere 3 Tage)
-        const newEpochEndTime = new Date().getTime() + 3 * 24 * 60 * 60 * 1000
+        // Screenshots erstellen und zu Pinata hochladen
+        captureCanvasScreenshot()
+        
+        // Zu Pinata hochladen
+        captureCanvasAndUploadToIPFS().then(ipfsUrl => {
+          if (ipfsUrl) {
+            console.log('Canvas-Screenshot zu IPFS/Pinata hochgeladen:', ipfsUrl)
+            setIpfsUrl(ipfsUrl)
+          } else {
+            console.error('Upload zu IPFS/Pinata fehlgeschlagen')
+          }
+        })
+
+        // Setze den Timer für die nächste Epoche basierend auf der festen Startzeit
+        const nextEpochEndTime = calculateNextEpochEndTime()
+        const newEpochEndTime = nextEpochEndTime.getTime()
         setEpochEndTime(newEpochEndTime)
-        console.log(`New epoch end time set to: ${new Date(newEpochEndTime).toLocaleTimeString()}`)
+        console.log(`New epoch end time set to: ${nextEpochEndTime.toLocaleTimeString()}`)
 
         // Setze die Liste der Mitwirkenden zurück für die neue Epoche
         setEpochContributors([])
 
         // Canvas zurücksetzen
         resetCanvas()
+        
+        // Lade die aktualisierten Teilnehmerdaten
+        fetch('/api/contributors/get')
+          .then(response => response.json())
+          .then(data => {
+            console.log('Aktualisierte Teilnehmer nach Epochenende:', data)
+          })
+          .catch(error => {
+            console.error('Fehler beim Aktualisieren der Teilnehmer:', error)
+          })
       }
     }
 
@@ -209,6 +251,22 @@ const Game: NextPage = () => {
             if (account && !epochContributors.includes(account.address)) {
               setEpochContributors((prev) => [...prev, account.address])
               console.log(`Added ${account.address} to epoch contributors (total: ${epochContributors.length + 1})`)
+              
+              // Speichere die Adresse auch server-seitig
+              fetch('/api/contributors/add', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ address: account.address }),
+              })
+                .then(response => response.json())
+                .then(data => {
+                  console.log('Server response:', data)
+                })
+                .catch(error => {
+                  console.error('Fehler beim Speichern des Teilnehmers:', error)
+                })
             }
 
             setIsTransactionInProgress(false)
@@ -522,7 +580,6 @@ const Game: NextPage = () => {
       const canvas = document.getElementById('mainCanvas') as HTMLCanvasElement
       if (!canvas) {
         setIsUploadingToIPFS(false)
-
         return null
       }
 
@@ -531,7 +588,20 @@ const Game: NextPage = () => {
       const epochNumber = Math.floor(Date.now() / (3 * 24 * 60 * 60 * 1000)) // Basierend auf 3-Tage-Intervallen
       const fileName = `Screenshot_Epoch_${epochNumber}_${new Date().toISOString().replace(/:/g, '-')}.png`
 
-      // Screenshot an den Server senden zum Speichern
+      // Versuche zuerst, das Bild zu Pinata hochzuladen
+      console.log("Versuche Upload zu Pinata...")
+      const pinataUrl = await uploadToPinata(imageData, fileName.replace('.png', ''))
+      
+      if (pinataUrl) {
+        console.log('Bild erfolgreich zu Pinata hochgeladen:', pinataUrl)
+        setScreenshotUrl(pinataUrl)
+        setIpfsUrl(pinataUrl)
+        setIsUploadingToIPFS(false)
+        return pinataUrl
+      }
+      
+      // Fallback: Speichere auf dem Server, wenn Pinata fehlschlägt
+      console.log("Pinata Upload fehlgeschlagen, versuche Server-Speicherung...")
       const response = await fetch('/api/save-screenshot', {
         method: 'POST',
         headers: {
@@ -547,7 +617,7 @@ const Game: NextPage = () => {
       }
 
       const fullImagePath = `${window.location.origin}${data.imagePath}`
-      console.log('Bild erfolgreich gespeichert:', fullImagePath)
+      console.log('Bild erfolgreich auf dem Server gespeichert:', fullImagePath)
 
       setScreenshotUrl(fullImagePath)
       setIpfsUrl(fullImagePath)
@@ -555,7 +625,6 @@ const Game: NextPage = () => {
       return fullImagePath
     } catch (err: unknown) {
       console.error('Fehler beim Erfassen des Screenshots:', err)
-
       return null
     } finally {
       setIsUploadingToIPFS(false)

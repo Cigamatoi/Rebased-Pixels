@@ -864,4 +864,127 @@
   font-size: 1rem;
   min-width: 60px;
   text-align: center;
+}
+
+.connectWalletButton {
+  margin-right: 10px;
+  background: linear-gradient(90deg, #9945FF, #8752F3);
+  border: none;
+  padding: 0.65rem 1.2rem;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(153, 69, 255, 0.6);
+  transition: transform 0.2s, box-shadow 0.3s;
+  font-weight: 600;
+}
+
+.connectWalletButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(153, 69, 255, 0.8);
+}
+
+.nftInfo {
+  font-size: 0.9rem;
+  color: #9945FF;
+  margin-top: 8px;
+  font-style: italic;
+  background-color: rgba(153, 69, 255, 0.1);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(153, 69, 255, 0.3);
+  display: inline-block;
+}
+
+/* Füge diese Styles am Ende der Datei hinzu */
+
+.mintNftContainer {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.mintNftButton {
+  background-color: #00ccaa;
+  color: #001122;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.mintNftButton:hover:not(:disabled) {
+  background-color: #00ffcc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 255, 204, 0.3);
+}
+
+.mintNftButton:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.mintNftButton.loading {
+  background-color: #555;
+  cursor: wait;
+}
+
+.mintResult {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.mintResult.success {
+  background-color: rgba(0, 204, 170, 0.2);
+  border: 1px solid #00ccaa;
+  color: #00ffcc;
+}
+
+.mintResult.error {
+  background-color: rgba(255, 76, 76, 0.2);
+  border: 1px solid #ff4c4c;
+  color: #ff6666;
+}
+
+.transactionLink {
+  display: inline-block;
+  margin-top: 10px;
+  color: #00ffcc;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.transactionLink:hover {
+  color: #00ccaa;
+}
+
+.connectWalletMessage {
+  margin-top: 20px;
+  text-align: center;
+  background-color: rgba(0, 204, 170, 0.1);
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 204, 170, 0.3);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.connectWalletMessage p {
+  color: #00ccaa;
+  margin-bottom: 10px;
+  font-weight: 500;
 } 

@@ -1,0 +1,30 @@
+{
+  "name": "RebasedPixels - Epoch 3",
+  "description": "RebasedPixels NFT für die Canvas der Epoch 3",
+  "creator": "Cigamatoi",
+  "epoch": 3,
+  "timestamp": "2025-04-18T10:45:34.585Z",
+  "pixelCount": 5,
+  "canvasSize": {
+    "width": 1000,
+    "height": 1000
+  },
+  "attributes": [
+    {
+      "trait_type": "Epoch",
+      "value": 3
+    },
+    {
+      "trait_type": "Contributors",
+      "value": 5
+    },
+    {
+      "trait_type": "Creator",
+      "value": "Cigamatoi"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "RebasedPixels"
+    }
+  ]
+}

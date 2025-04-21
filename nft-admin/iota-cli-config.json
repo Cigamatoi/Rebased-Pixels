@@ -1,0 +1,11 @@
+{
+  "envs": {
+    "testnet": {
+      "aliases": {},
+      "chain_id": "2304aa97",
+      "url": "https://api.testnet.iota.cafe"
+    }
+  },
+  "active_env": "testnet",
+  "active_address": null
+} 

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Kompilierungsschritt für das Buildpack
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+# Installationsverzeichnis
+INSTALL_DIR="$BUILD_DIR/.heroku/iota-cli"
+mkdir -p $INSTALL_DIR
+
+echo "-----> Installing IOTA CLI"
+
+# Herunterladen der Linux-Version der IOTA CLI
+IOTA_CLI_VERSION="0.12.0-rc"
+IOTA_CLI_URL="https://github.com/iotaledger/iota-sdk/releases/download/v${IOTA_CLI_VERSION}/iota-cli-linux-x64.tar.gz"
+
+# Erstelle temporäres Verzeichnis
+TMP_DIR=$(mktemp -d)
+cd $TMP_DIR
+
+# Lade die Datei herunter
+echo "-----> Downloading IOTA CLI v${IOTA_CLI_VERSION}"
+curl -L --silent $IOTA_CLI_URL -o iota-cli.tar.gz
+
+# Entpacke die Datei
+echo "-----> Extracting IOTA CLI"
+tar -xzf iota-cli.tar.gz
+
+# Kopiere die Binärdatei in das Installationsverzeichnis
+cp iota-cli $INSTALL_DIR/
+
+# Mache die Binärdatei ausführbar
+chmod +x $INSTALL_DIR/iota-cli
+
+# Erstelle einen Symlink im PATH
+mkdir -p "$BUILD_DIR/.profile.d"
+cat << EOF > "$BUILD_DIR/.profile.d/iota-cli.sh"
+export PATH="\$PATH:$INSTALL_DIR"
+export IOTA_CLI_PATH="$INSTALL_DIR/iota-cli"
+EOF
+
+echo "-----> IOTA CLI Installation completed" 
